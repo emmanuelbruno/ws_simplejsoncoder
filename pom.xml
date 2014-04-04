@@ -15,6 +15,13 @@
     <name>SimpleJSONCoder</name>
     <url>http://maven.apache.org</url>
 
+    <repositories>
+        <repository>
+            <id>lsispublic</id>
+            <url>https://lsis.univ-tln.fr/maven/content/groups/lsispublicrepositories/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>javax.websocket</groupId>
@@ -40,11 +47,14 @@
             <version>2.3.1</version>
         </dependency>
 
+        <!-- Only needed for test -->
         <dependency>
             <groupId>fr.univtln.bruno.test.simple.personne</groupId>
-            <artifactId>Personne</artifactId>
+            <artifactId>SimplePersonne</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
+
 </project>

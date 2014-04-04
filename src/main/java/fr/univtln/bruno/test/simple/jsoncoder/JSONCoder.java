@@ -8,22 +8,23 @@ import javax.websocket.*;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
  * Created by bruno on 23/03/14.
  */
-public class JSONCoder<T> implements  Encoder.TextStream<T>, Decoder.TextStream<T>{
+public abstract class JSONCoder<T> implements  Encoder.TextStream<T>, Decoder.TextStream<T>{
 
     private static final ObjectMapper _objectMapper = new ObjectMapper();
     private ObjectWriter _writer = JSONCoder._objectMapper.writer();
     private ObjectReader _reader = JSONCoder._objectMapper.reader();
 
-    private Class<T> _type;
+   private Class<T> _type;
 
-    @Override
-    public void init(EndpointConfig endpointConfig) {
+    public void init() {
+
         ParameterizedType $thisClass = (ParameterizedType) this.getClass().getGenericSuperclass();
         Type $T = $thisClass.getActualTypeArguments()[0];
         if ($T instanceof Class) {
@@ -35,13 +36,18 @@ public class JSONCoder<T> implements  Encoder.TextStream<T>, Decoder.TextStream<
     }
 
     @Override
+    public void init(EndpointConfig endpointConfig) {
+        init();
+    }
+
+    @Override
     public void destroy() {
 
     }
 
     @Override
     public void encode(T t, Writer writer) throws EncodeException, IOException {
-        _objectMapper.writeValue(writer, t);
+        _objectMapper.writerWithType(_type).writeValue(writer, t);
     }
 
     @Override
