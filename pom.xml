@@ -9,7 +9,7 @@
 
     <groupId>fr.univtln.bruno.test.simple.jsoncoder</groupId>
     <artifactId>JSONCoder</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>SimpleJSONCoder</name>
